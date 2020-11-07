@@ -1,0 +1,42 @@
+{
+    "b": {
+        "policy": {},
+        "name": "flow.request",
+        "_BaseProtector__dataRef": {
+            "data": {
+                "http_version": "HTTP/1.1",
+                "headers": {
+                    "fields": [
+                        [
+                            "Host",
+                            "yoniwas.com"
+                        ],
+                        [
+                            "User-Agent",
+                            "curl/7.55.1"
+                        ],
+                        [
+                            "Accept",
+                            "*/*"
+                        ],
+                        [
+                            "Proxy-Connection",
+                            "Keep-Alive"
+                        ]
+                    ]
+                },
+                "content": "",
+                "trailers": null,
+                "timestamp_start": 1604619918.3714674,
+                "timestamp_end": 1604619918.3734434,
+                "host": "yoniwas.com",
+                "port": 80,
+                "method": "GET",
+                "scheme": "http",
+                "authority": "",
+                "path": "/"
+            }
+        },
+        "dataName": "method"
+    }
+}

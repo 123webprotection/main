@@ -1,0 +1,24 @@
+version: '3'
+services: 
+    dev:
+        build: 
+            context: .
+        command: ["mitmdump --set listen_port=8081 --set http2=false -s /usr/app/addons_init.py"]
+        volumes: 
+            - "./src:/usr/app"
+        ports: 
+            - "8081:8081"
+
+# Addon events:
+# https://docs.mitmproxy.org/stable/addons-events/#http-events
+
+# Req\Resp data:
+# https://mitmproxy.readthedocs.io/en/v2.0.2/scripting/api.html#mitmproxy.http.HTTPRequest
+
+            
+# "C:\Users\Yoni\AppData\Local\Programs\Python\Python37-32\Scripts\mitmdump.exe" 
+# --mode transparent 
+# --set http2=false 
+# -s "C:\Users\Yoni\Desktop\selfcac\FilteringComponents\MitmprxyPlugin\mitm_plugin_httpfilter.py"
+
+# curl -x http://localhost:8081 http://yoniwas.com
