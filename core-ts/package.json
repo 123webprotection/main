@@ -1,0 +1,31 @@
+{
+  "name": "plugin1",
+  "version": "1.0.0",
+  "description": "Example 123webprotection js plugin",
+  "scripts": {
+    "gen:types": "tsc src/expose.ts --declaration --module commonjs --target es6 --outDir bundle --emitDeclarationOnly --skipLibCheck",
+    "combine:types" : "node make-bundle-types.js",
+    "gen:es5": "node make-bundle.js",
+    "bundle": "yarn gen:types && yarn combine:types && yarn gen:es5",
+    "test": "ts-node outside.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "word-wrap": "^1.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "browserify-shim": "^3.8.14",
+    "dts-bundle": "^0.7.3",
+    "ts-node": "^9.0.0",
+    "tsify": "^5.0.2",
+    "typescript": "^4.0.3"
+  }
+}
