@@ -1,0 +1,152 @@
+prod and dev has seperate contexts...
+	 2 Total, so our policy will be avail to all.
+
+very simple config per plugin.
+	json of {type: 0/false/[],{childs},"" desc:"", secret: Y\N (hide text)}
+		isValid callback
+		onChange
+			generateSchema based on value
+			save to file?
+
+config of plugin:
+	- type 
+		- <Desc,Bool>
+		- <Desc,String>
+		- List<?>
+
+*** files (make script):
+	- readme MD \ html \ images -> sandboxed iframe
+	- js files
+	- static files
+	- xml? with version for update {0.0.0}
+
+*** each can console.log, and make EP for images (canvas support?)
+
+
+** you define permission file and take data from there, so Typescript will help you
+** 
+
+=======================
+
+actions.allow_stop Y\N
+actions.bypass ---> Make url trusted
+
+req.before.url.domain.read , <domain> <path> params[Y\N]
+req.before.url.domain.modify , <domain> <path> params[Y\N]
+req.after
+res.headers
+res.after
+
+req.(no * support).url.header.read, <URL Matcher>, Header Name
+
+		Group by domain mach, actions with header will still need to use extra header info
+		
+		Shutdown\Lock actions cannot be grouped
+			Will happen by agent but not on admin account
+
+=======================
+
+Privacy - Risk Levels: (not for stopping crypto or ads)
+	* no out,
+	No full acess:
+		* out, exact in+out
+		* out not exact  
+			* exact domain
+			* not exact domain
+	Full Acess
+		* any out + full read access req\res || auth headers
+		
+- notify on updates if policy not the same.
+
+Set url\html\Run JS in page - Seperate Alert because might show ads.
+
+=======================
+
+how to share stuff like "Time blocked" with other plugins?
+	- Data only plugins (Plugin with types "Policy Plugins")? (with fetch\save)
+		How to do mapping mode then?
+			One time high alerted plugin with save rights?
+	- ENV or postMessage might be used to send data and escape Permissions
+
+=========================
+permission:
+	- Block level
+		- Test and Prod:
+			- Suggest Block
+				- Suggest Risk 1-100
+			- Block
+			[V] Nothing (Allow unless blocked)
+		- Prod only:
+			- Allow and stop checking
+			- Allow After Block
+	- Inptuts:
+		Contexts
+			Proxy.Net
+				allow Trusted SSL = allow domain bypass
+			
+				onReq
+					*Access Per:
+						- All web
+						- domain \ path
+							- contain
+							- regex
+					[] URL
+						[] Allow read of X 
+							domain
+							path
+						[] Allow set of 
+							path
+							domain
+					[] Headers
+						[] Allow read of X (like header)
+						[] Allow set of X (header)
+						[] Auth 
+							[] Cookies - Default false
+							[] WWW-...
+							[] Auth
+					[] Body
+						[] sendFilter
+							[ ] blocklist values:
+								- pass/password/username/un
+							sendRegex
+							sendWord
+						[] Stream - pass body for:
+							* json
+							* html
+				onResp
+					(on top of the request)
+					html
+						querySelector - whitelist
+					json
+						path - whitelist with [*]
+					sendRegex
+					sendWord
+					[ ] Full read access
+			Chrome.Ext
+			Helper.Wifi
+				read hashed names
+				read real names
+			Helper.Time \ Shutdown?
+		request REST API Webhook
+			* Response is action enum only? (ALLOW,BLOCK,TRUSTED) ?
+			** Think about it, how can we share 123Policy result without reason? and reason might leak data
+		fetch - download data only 
+			- constant path\data
+			- constant domain but no path
+				- constant\ dynamic data
+	- Outputs:
+		- sandboxed files
+		- shared files?
+			- constant paths
+		- REST API Webhook Response to requester
+		- fetch
+			- domains
+			- paths
+		- outputfiles
+			- Format or Absolute
+			
+	- Allow acces by other plugins - like postMessage
+		allow readData from List<X>
+			implies sendData for other
+		allow sendData to List<X>\All === Just like any output
+			implies readData for them
